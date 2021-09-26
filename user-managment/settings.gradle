@@ -1,0 +1,4 @@
+rootProject.name = 'user-managment'
+include 'user-core'
+include 'user-cmd-api'
+include 'user-query-api'
