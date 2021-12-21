@@ -1,6 +1,6 @@
 package com.georgeisaev.springbank.user.cmd.api;
 
-import com.georgeisaev.springbank.usercore.event.AxonConfig;
+import com.georgeisaev.springbank.usercore.configuration.AxonConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;

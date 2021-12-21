@@ -1,4 +1,4 @@
-package com.georgeisaev.springbank.usercore.event;
+package com.georgeisaev.springbank.usercore.configuration;
 
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
