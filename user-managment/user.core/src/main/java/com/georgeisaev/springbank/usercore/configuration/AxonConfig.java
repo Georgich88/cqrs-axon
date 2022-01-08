@@ -26,13 +26,13 @@ import java.util.List;
 @Configuration
 public class AxonConfig {
 
-    @Value("spring.data.mongodb.host:localhost")
+    @Value("${spring.data.mongodb.host}")
     String mongoHost;
 
-    @Value("spring.data.mongodb.port:27017")
+    @Value("${spring.data.mongodb.port}")
     int mongoPort;
 
-    @Value("spring.data.mongodb.database:user")
+    @Value("${spring.data.mongodb.database}")
     String mongoDatabase;
 
     @Bean
