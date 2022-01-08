@@ -45,7 +45,7 @@ public class AxonConfig {
     }
 
     @Bean
-    public MongoTemplate mongoTemplate() {
+    public MongoTemplate axonMongoTemplate() {
         return DefaultMongoTemplate.builder()
                 .mongoDatabase(mongoClient(), mongoDatabase)
                 .build();
@@ -54,7 +54,7 @@ public class AxonConfig {
     @Bean
     public TokenStore tokenStore(Serializer serializer) {
         return MongoTokenStore.builder()
-                .mongoTemplate(mongoTemplate())
+                .mongoTemplate(axonMongoTemplate())
                 .serializer(serializer)
                 .build();
     }

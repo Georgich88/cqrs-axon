@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.axonframework.config.ProcessingGroup;
+import org.axonframework.eventhandling.EventHandler;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,16 +19,19 @@ public class UserEventHandlerImpl implements UserEventHandler {
 
     UserRepository userRepository;
 
+    @EventHandler
     @Override
     public void on(UserRegisteredEvent event) {
         userRepository.save(event.getUser());
     }
 
+    @EventHandler
     @Override
     public void on(UserUpdatedEvent event) {
         userRepository.save(event.getUser());
     }
 
+    @EventHandler
     @Override
     public void on(UserRemovedEvent event) {
         userRepository.deleteById(event.getId());
