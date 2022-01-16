@@ -1,5 +1,6 @@
 package com.georgeisaev.springbank.user.cmd.api.dto;
 
+import com.georgeisaev.springbank.usercore.dto.BaseResponse;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

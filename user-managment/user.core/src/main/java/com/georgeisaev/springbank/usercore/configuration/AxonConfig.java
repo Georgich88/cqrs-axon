@@ -2,6 +2,10 @@ package com.georgeisaev.springbank.usercore.configuration;
 
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.axonframework.eventhandling.tokenstore.TokenStore;
@@ -15,10 +19,12 @@ import org.axonframework.extensions.mongo.eventsourcing.eventstore.MongoFactory;
 import org.axonframework.extensions.mongo.eventsourcing.eventstore.MongoSettingsFactory;
 import org.axonframework.extensions.mongo.eventsourcing.tokenstore.MongoTokenStore;
 import org.axonframework.serialization.Serializer;
+import org.axonframework.serialization.xml.XStreamSerializer;
 import org.axonframework.spring.config.AxonConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.List;
 
@@ -60,11 +66,13 @@ public class AxonConfig {
     }
 
     @Bean
-    public EventStorageEngine storageEngine(MongoClient mongoClient) {
+    public EventStorageEngine storageEngine(MongoClient mongoClient, Serializer serializer) {
         return MongoEventStorageEngine.builder()
                 .mongoTemplate(DefaultMongoTemplate.builder()
                         .mongoDatabase(mongoClient)
                         .build())
+                .eventSerializer(serializer)
+                .snapshotSerializer(serializer)
                 .build();
     }
 
@@ -74,6 +82,32 @@ public class AxonConfig {
                 .storageEngine(storageEngine)
                 .messageMonitor(configuration.messageMonitor(EventStore.class, "eventStore"))
                 .build();
+    }
+
+    @Bean
+    @Primary
+    public XStream xstream() {
+        XStream xstream = new XStream();
+        // clear out existing permissions and set own ones
+        xstream.addPermission(NoTypePermission.NONE);
+        // allow "null" and primitive types
+        xstream.addPermission(NullPermission.NULL);
+        xstream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+        // allow any type from the same package
+        xstream.allowTypesByWildcard(new String[]{
+                "com.georgeisaev.springbank.**",
+                "org.axonframework.**",
+                "java.**",
+                "com.thoughtworks.xstream.**"
+        });
+
+        return xstream;
+    }
+
+    @Bean
+    @Primary
+    public Serializer serializer(XStream xStream) {
+        return XStreamSerializer.builder().xStream(xStream).build();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.georgeisaev.springbank.user.cmd.api.dto;
+package com.georgeisaev.springbank.usercore.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
