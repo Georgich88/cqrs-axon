@@ -64,7 +64,7 @@ public class UserQueryController {
         }
     }
 
-    @GetMapping("/{filter}")
+    @GetMapping("/search/{filter}")
     public ResponseEntity<UserSearchResponse> search(@PathVariable String filter) {
         try {
             var query = new SearchUsersQuery(filter);
