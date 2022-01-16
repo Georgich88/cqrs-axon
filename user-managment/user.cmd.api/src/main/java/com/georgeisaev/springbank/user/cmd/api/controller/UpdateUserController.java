@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.slf4j.helpers.MessageFormatter;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -38,9 +36,7 @@ public class UpdateUserController {
         try {
             command.setId(id);
             commandGateway.sendAndWait(command);
-            return ResponseEntity
-                    .status(HttpStatus.CREATED)
-                    .body(new BaseResponse(MSG_INFO_USER_SUCCESSFULLY_UPDATED));
+            return ResponseEntity.ok(new BaseResponse(MSG_INFO_USER_SUCCESSFULLY_UPDATED));
         } catch (Exception e) {
             String safeErrorMessage = MessageFormatter.format(MSG_ERR_UPDATE_REQUEST, command.getId()).getMessage();
             log.error(safeErrorMessage, e);
