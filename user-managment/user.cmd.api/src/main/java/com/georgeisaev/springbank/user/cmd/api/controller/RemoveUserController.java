@@ -1,7 +1,7 @@
 package com.georgeisaev.springbank.user.cmd.api.controller;
 
 import com.georgeisaev.springbank.user.cmd.api.command.RemoveUserCommand;
-import com.georgeisaev.springbank.user.cmd.api.dto.BaseResponse;
+import com.georgeisaev.springbank.usercore.dto.BaseResponse;
 import com.georgeisaev.springbank.user.cmd.api.dto.RegisterUserResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
