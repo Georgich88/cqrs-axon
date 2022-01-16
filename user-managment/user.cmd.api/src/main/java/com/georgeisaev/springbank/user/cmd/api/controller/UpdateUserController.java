@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ import javax.validation.Valid;
 @RequestMapping(path = "/api/v1/update-user")
 public class UpdateUserController {
 
-    private static final String MSG_ERR_UPDATE_REQUEST = "Error while processing register user request for id {}";
+    private static final String MSG_ERR_UPDATE_REQUEST = "Error while processing update user request for id {}";
     private static final String MSG_INFO_USER_SUCCESSFULLY_UPDATED = "User successfully updated";
 
     CommandGateway commandGateway;
