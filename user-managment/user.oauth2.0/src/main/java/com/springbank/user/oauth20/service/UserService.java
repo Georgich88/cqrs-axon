@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,13 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class UserService {
+public class UserService implements UserDetailsService {
 
     public static final String MSG_ERR_USER_NOT_FOUND = "Incorrect Username / Password supplied";
     UserRepository userRepository;
 
-    public UserDetails findUserDetailsByUserName(String username) {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userByAccountUsername = userRepository.findByAccountUsername(username);
         var user = userByAccountUsername.orElseThrow(() -> new UsernameNotFoundException(MSG_ERR_USER_NOT_FOUND));
         var account = user.getAccount();
