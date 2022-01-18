@@ -1,25 +1,31 @@
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.security:spring-security-bom:5.5.1")
+    }
+}
+
 dependencies {
+    // Project modules
     implementation project(':user.core')
     // Database
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'javax.validation:validation-api:2.0.1.Final'
-    // Swagger
-    implementation 'org.springdoc:springdoc-openapi-ui:1.6.3'
-    // Axon
-    implementation 'org.axonframework.extensions.mongo:axon-mongo:4.5'
-    implementation 'org.axonframework:axon-spring-boot-starter:4.5.7'
+    // Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.security:spring-security-oauth2-core'
+    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.2.0'
+    implementation 'org.springframework.security:spring-security-jwt:1.1.1.RELEASE'
+    implementation 'com.sun.xml.bind:jaxb-core:3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:3.0.1'
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
