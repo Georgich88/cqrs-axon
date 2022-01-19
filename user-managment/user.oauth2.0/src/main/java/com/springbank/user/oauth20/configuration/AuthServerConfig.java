@@ -26,7 +26,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     String clientId;
     String clientSecret;
-    String tokenName;
+    String signingKey;
     int accessTokenValiditySeconds;
     int refreshTokenValiditySeconds;
     final AuthenticationManager authenticationManager;
@@ -34,7 +34,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter tokenConverter() {
         var converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(tokenName);
+        converter.setSigningKey(signingKey);
         return converter;
     }
 

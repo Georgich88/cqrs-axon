@@ -1,6 +1,7 @@
 package com.georgeisaev.springbank.user.cmd.api.controller;
 
 import com.georgeisaev.springbank.user.cmd.api.command.UpdateUserCommand;
+import com.georgeisaev.springbank.user.cmd.api.security.BearerAuthSecuredRestController;
 import com.georgeisaev.springbank.usercore.dto.BaseResponse;
 import com.georgeisaev.springbank.user.cmd.api.dto.RegisterUserResponse;
 import lombok.AccessLevel;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,13 +25,14 @@ import javax.validation.Valid;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RestController
 @RequestMapping(path = "/api/v1/update-user")
-public class UpdateUserController {
+public class UpdateUserControllerAuth implements BearerAuthSecuredRestController {
 
     private static final String MSG_ERR_UPDATE_REQUEST = "Error while processing update user request for id {}";
     private static final String MSG_INFO_USER_SUCCESSFULLY_UPDATED = "User successfully updated";
 
     CommandGateway commandGateway;
 
+    @PreAuthorize("hasAuthority('WRITE_PRIVILEGE')")
     @PutMapping(path = "{id}")
     public ResponseEntity<BaseResponse> updateUser(@PathVariable String id,
                                                    @Valid @RequestBody UpdateUserCommand command) {
