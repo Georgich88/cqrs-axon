@@ -1,7 +1,7 @@
-package com.springbank.user.oauth20.service;
+package com.georgeisaev.springbank.oauth20.service;
 
 import com.georgeisaev.springbank.usercore.model.User;
-import com.springbank.user.oauth20.repository.UserRepository;
+import com.georgeisaev.springbank.oauth20.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

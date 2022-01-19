@@ -1,4 +1,4 @@
-package com.springbank.user.oauth20;
+package com.georgeisaev.springbank.oauth20;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

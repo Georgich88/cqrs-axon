@@ -1,4 +1,4 @@
-package com.springbank.user.oauth20.repository;
+package com.georgeisaev.springbank.oauth20.repository;
 
 import com.georgeisaev.springbank.usercore.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
