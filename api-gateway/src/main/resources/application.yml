@@ -20,3 +20,9 @@ spring:
           uri: http://localhost:8082/api/v1/user-search/**
           predicates:
             - Path=/api/v1/user-search/**
+
+springdoc:
+  swagger-ui:
+    path: /swagger-doc/swagger-ui.html
+  api-docs:
+    path: /swagger-doc/v3/api-docs
