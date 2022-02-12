@@ -1,4 +1,4 @@
-rootProject.name = 'bank-account-managment'
+rootProject.name = 'bank-account-management'
 include 'bankaccount.cmd.api'
 include 'bankaccount.query.api'
 include 'bankaccount.core'
